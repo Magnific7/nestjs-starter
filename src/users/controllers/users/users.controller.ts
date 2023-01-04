@@ -57,6 +57,6 @@ export class UsersController {
     @Param('postId') postId: string,
   ) {
     console.log(id, postId);
-    return { id, postId };
+    return this.UsersService.fetchUserId(id);
   }
 }

@@ -9,6 +9,8 @@ import {
   Query,
   UsePipes,
   ValidationPipe,
+  HttpException,
+  HttpStatus,
 } from '@nestjs/common';
 import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
 import { Request, Response } from 'express';
@@ -57,6 +59,9 @@ export class UsersController {
     @Param('postId') postId: string,
   ) {
     console.log(id, postId);
-    return this.UsersService.fetchUserId(id);
+    const user = this.UsersService.fetchUserId(id);
+    if (!user)
+      throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
+    return user;
   }
 }

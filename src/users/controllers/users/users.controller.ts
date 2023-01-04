@@ -10,6 +10,7 @@ import {
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
+import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 
@@ -48,14 +49,18 @@ export class UsersController {
   }
 
   @Get(':id/:postId')
-  getUserById(@Param('id') id: string, @Param('postId') postId: string) {
+  getUserById(
+    @Param('id', ParseIntPipe) id: number,
+
+    @Param('postId') postId: string,
+  ) {
     console.log(id, postId);
     return { id, postId };
   }
 
   @Get()
-  getUserByIdFiltered(@Query('sortBy') sortBy: string) {
-    console.log(sortBy);
-    return {};
+  getUserByIdFiltered(@Query('sortDesc', ParseBoolPipe) sortDesc: boolean) {
+    console.log(sortDesc);
+    return { sortDesc };
   }
 }

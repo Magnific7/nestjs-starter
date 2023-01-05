@@ -11,16 +11,21 @@ import {
   ValidationPipe,
   HttpException,
   HttpStatus,
+  UseGuards,
 } from '@nestjs/common';
 import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { AuthGuardGuard } from 'src/users/guards/auth-guard/auth-guard.guard';
 import { ValidateCreateUserPipe } from 'src/users/pipes/validate-create-user/validate-create-user.pipe';
 import { UsersService } from 'src/users/services/users/users.service';
+
 
 @Controller('users')
 export class UsersController {
   constructor(private UsersService: UsersService) {}
+
+  @UseGuards(AuthGuardGuard)
 
   @Get('fetch')
   getUsers() {

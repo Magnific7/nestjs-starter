@@ -14,7 +14,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger/dist';
+import { ApiCreatedResponse, ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger/dist';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { User } from 'src/users/entities/user.entity';
@@ -28,9 +28,10 @@ export class UsersController {
   constructor(private UsersService: UsersService) {}
 
   @UseGuards(AuthGuardGuard)
+  @ApiQuery({ name: 'name', required: false })
   @Get('fetch')
-  getUsers() {
-    return this.UsersService.fetchUsers();
+  getUsers(@Query('name') name: string) {
+    return this.UsersService.fetchUsers(name);
   }
 
   @ApiOkResponse({ type: User, isArray: true })

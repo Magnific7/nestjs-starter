@@ -12,9 +12,9 @@ export class UsersService {
   }
   createUser(userDetails: CreateUserType) {
     this.fakeUsers.push(userDetails);
-    return;
+    return userDetails;
   }
   fetchUserId(id: number) {
-    return null;
+    return id;
   }
 }

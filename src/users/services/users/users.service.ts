@@ -6,8 +6,15 @@ export class UsersService {
   private fakeUsers = [
     { username: 'mag', email: 'here@kg' },
     { username: 'user2', email: 'heretwo@kg' },
+    { username: 'mag', email: 'heretwo@kg' },
+    { username: 'mag', email: 'heretwo@kg' },
+    { username: 'user2', email: 'heretwo@kg' }
+
   ];
-  fetchUsers() {
+  fetchUsers(name?: string) {
+    if (name) {
+      return this.fakeUsers.filter((user) => user.username === name);
+    }
     return this.fakeUsers;
   }
   createUser(userDetails: CreateUserType) {

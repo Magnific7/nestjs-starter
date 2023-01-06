@@ -14,7 +14,12 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { ApiCreatedResponse, ApiOkResponse, ApiQuery, ApiTags } from '@nestjs/swagger/dist';
+import {
+  ApiCreatedResponse,
+  ApiOkResponse,
+  ApiQuery,
+  ApiTags,
+} from '@nestjs/swagger/dist';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
 import { User } from 'src/users/entities/user.entity';
@@ -75,4 +80,5 @@ export class UsersController {
       throw new HttpException('User not found', HttpStatus.BAD_REQUEST);
     return user;
   }
+
 }

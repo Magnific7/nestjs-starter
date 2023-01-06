@@ -16,11 +16,11 @@ import { UsersService } from './services/users/users.service';
 export class UsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer
-      .apply(ExamplesMiddleware)
-      .forRoutes({
-        path: 'users/fetch',
-        method: RequestMethod.GET,
-      })
+      // .apply(ExamplesMiddleware)
+      // .forRoutes({
+      //   path: 'users/fetch',
+      //   method: RequestMethod.GET,
+      // })
       .apply(AnotherMiddlewareMiddleware)
       .forRoutes({
         path: 'users/create',

@@ -14,9 +14,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ParseBoolPipe, ParseIntPipe } from '@nestjs/common/pipes';
-import { ApiTags } from '@nestjs/swagger/dist';
+import { ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger/dist';
 import { Request, Response } from 'express';
 import { CreateUserDto } from 'src/users/dtos/CreateUser.dto';
+import { User } from 'src/users/entities/user.entity';
 import { AuthGuardGuard } from 'src/users/guards/auth-guard/auth-guard.guard';
 import { ValidateCreateUserPipe } from 'src/users/pipes/validate-create-user/validate-create-user.pipe';
 import { UsersService } from 'src/users/services/users/users.service';
@@ -32,6 +33,7 @@ export class UsersController {
     return this.UsersService.fetchUsers();
   }
 
+  @ApiOkResponse({ type: User, isArray: true })
   @Get('fetch/posts')
   getUsersPosts() {
     return [
@@ -52,6 +54,7 @@ export class UsersController {
     ];
   }
 
+  @ApiCreatedResponse({ type: User })
   @Post('create')
   @UsePipes(new ValidationPipe())
   createUser(@Body(ValidateCreateUserPipe) userData: CreateUserDto) {

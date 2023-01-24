@@ -396,3 +396,6 @@ Temporary Items
 # Local
 .env
 dist
+package-lock.json
+yarn.lock
+docker.env

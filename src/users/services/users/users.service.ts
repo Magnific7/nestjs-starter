@@ -7,7 +7,7 @@ import { Repository } from 'typeorm';
 @Injectable()
 export class UsersService {
   @InjectRepository(User)
-  private readonly repository: Repository<User>;
+  private readonly userRepository: Repository<User>;
 
   private fakeUsers = [
     { username: 'mag', email: 'here@kg' },
@@ -32,7 +32,7 @@ export class UsersService {
       // const newUser = new User ;
       // console.log('userDetails', userDetails);
       const newUser = Object.assign(new User(), userDetails);
-      return this.repository.save(newUser);
+      return this.userRepository.save(newUser);
     }
   }
 

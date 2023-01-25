@@ -17,7 +17,7 @@ export class User {
   @Column()
   age: number;
 
-  @Column()
+  @Column({ nullable: true })
   role: string;
 }
 
